@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Xác nhận OTP đăng ký</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+    <main class="auth">
+        <h1>Xác nhận OTP đăng ký</h1>
+        <p class="error" th:if="${error}" th:text="${error}"></p>
+        <form th:action="@{/verify-register}" method="post">
+            <label>Mã OTP<input name="otp" maxlength="6" required></label><button>Xác nhận</button>
+        </form>
+    </main>
+</body>
+
+</html>

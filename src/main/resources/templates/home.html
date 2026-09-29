@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Example 3</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main class="container">
+    <h1>Ví dụ 3 - Spring Security</h1>
+    <p>Register OTP • Login session • Forgot Password OTP • CRUD User/Product • Cloudinary • MapStruct</p>
+    <div class="cards">
+        <div class="card"><b th:text="${userCount}">0</b><span>Tổng user</span></div>
+        <div class="card"><b th:text="${productCount}">0</b><span>Tổng product</span></div>
+        <div class="card"><b th:text="${myProductCount}">0</b><span>Product của tôi</span></div>
+    </div>
+</main>
+</body>
+</html>

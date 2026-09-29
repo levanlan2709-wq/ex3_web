@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Products</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body><div th:replace="~{fragments/header :: header}"></div><main class="container">
+<h1>Sản phẩm của tôi</h1>
+<form method="get"><input name="keyword" th:value="${keyword}" placeholder="Tìm sản phẩm"><button>Tìm</button></form>
+<a class="button" th:href="@{/products/add}">+ Thêm sản phẩm</a>
+<table><tr><th>ID</th><th>Ảnh</th><th>Tên</th><th>Giá</th><th>SL</th><th>Thao tác</th></tr>
+<tr th:each="p : ${data.content}">
+<td th:text="${p.id}"></td>
+<td><img class="thumb" th:if="${p.images}" th:src="${p.images}"></td>
+<td th:text="${p.name}"></td><td th:text="${p.price}"></td><td th:text="${p.quantity}"></td>
+<td><a th:href="@{/products/edit/{id}(id=${p.id})}">Sửa</a>
+<form class="inline" th:action="@{/products/delete/{id}(id=${p.id})}" method="post"><button>Xóa</button></form></td>
+</tr></table>
+<div class="paging">
+<a th:if="${data.hasPrevious()}" th:href="@{/products(page=${data.number-1},keyword=${keyword})}">← Trước</a>
+<span th:text="|Trang ${data.number+1}/${data.totalPages == 0 ? 1 : data.totalPages}|"></span>
+<a th:if="${data.hasNext()}" th:href="@{/products(page=${data.number+1},keyword=${keyword})}">Sau →</a>
+</div></main></body></html>

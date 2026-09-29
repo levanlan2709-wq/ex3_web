@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main class="container">
+        <h1>Quản lý User</h1>
+        <form method="get"><input name="keyword" th:value="${keyword}"
+                placeholder="Username, email, fullname"><button>Tìm</button></form>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Fullname</th>
+                <th>Role</th>
+                <th>Enabled</th>
+                <th></th>
+            </tr>
+            <tr th:each="u : ${data.content}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.fullName}"></td>
+                <td th:text="${u.roleName}"></td>
+                <td th:text="${u.enabled}"></td>
+                <td><a th:href="@{/admin/users/edit/{id}(id=${u.id})}">Sửa</a>
+                    <form class="inline" th:action="@{/admin/users/delete/{id}(id=${u.id})}" method="post">
+                        <button>Xóa</button></form>
+                </td>
+            </tr>
+        </table>
+        <div class="paging"><a th:if="${data.hasPrevious()}"
+                th:href="@{/admin/users(page=${data.number-1},keyword=${keyword})}">← Trước</a>
+            <span th:text="|Trang ${data.number+1}/${data.totalPages == 0 ? 1 : data.totalPages}|"></span>
+            <a th:if="${data.hasNext()}" th:href="@{/admin/users(page=${data.number+1},keyword=${keyword})}">Sau →</a>
+        </div>
+    </main>
+</body>
+
+</html>
